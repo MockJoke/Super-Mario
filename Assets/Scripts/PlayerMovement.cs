@@ -10,9 +10,9 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 velocity;
     private float inputAxis;
 
-    public float moveSpeed = 8f;
-    public float maxJumpHeight = 5f;
-    public float maxJumpTime = 1f;
+    [SerializeField] private float moveSpeed = 8f;
+    [SerializeField] private float maxJumpHeight = 5f;
+    [SerializeField] private float maxJumpTime = 1f;
     public float jumpForce => (2f * maxJumpHeight) / (maxJumpTime / 2f);
     public float gravity => (-2f * maxJumpHeight) / Mathf.Pow(maxJumpTime / 2f, 2f);
 
@@ -25,8 +25,12 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         camera = Camera.main;
-        rigidbody = GetComponent<Rigidbody2D>();
-        collider = GetComponent<Collider2D>();
+        
+        if (rigidbody == null)
+            rigidbody = GetComponent<Rigidbody2D>();
+        
+        if (collider == null)
+            collider = GetComponent<Collider2D>();
     }
 
     private void OnEnable()
@@ -51,7 +55,8 @@ public class PlayerMovement : MonoBehaviour
 
         grounded = rigidbody.Raycast(Vector2.down);
 
-        if (grounded) {
+        if (grounded) 
+        {
             GroundedMovement();
         }
 
@@ -79,21 +84,25 @@ public class PlayerMovement : MonoBehaviour
         velocity.x = Mathf.MoveTowards(velocity.x, inputAxis * moveSpeed, moveSpeed * Time.deltaTime);
 
         // check if running into a wall
-        if (rigidbody.Raycast(Vector2.right * velocity.x)) {
+        if (rigidbody.Raycast(Vector2.right * velocity.x)) 
+        {
             velocity.x = 0f;
         }
 
         // flip sprite to face direction
-        if (velocity.x > 0f) {
+        if (velocity.x > 0f) 
+        {
             transform.eulerAngles = Vector3.zero;
-        } else if (velocity.x < 0f) {
+        } 
+        else if (velocity.x < 0f) 
+        {
             transform.eulerAngles = new Vector3(0f, 180f, 0f);
         }
     }
 
     private void GroundedMovement()
     {
-        // prevent gravity from infinitly building up
+        // prevent gravity from infinitely building up
         velocity.y = Mathf.Max(velocity.y, 0f);
         jumping = velocity.y > 0f;
 
@@ -130,10 +139,10 @@ public class PlayerMovement : MonoBehaviour
         else if (collision.gameObject.layer != LayerMask.NameToLayer("PowerUp"))
         {
             // stop vertical movement if mario bonks his head
-            if (transform.DotTest(collision.transform, Vector2.up)) {
+            if (transform.DotTest(collision.transform, Vector2.up)) 
+            {
                 velocity.y = 0f;
             }
         }
     }
-
 }

@@ -12,7 +12,8 @@ public class BlockHit : MonoBehaviour
     {
         if (!animating && maxHits != 0 && collision.gameObject.CompareTag("Player"))
         {
-            if (collision.transform.DotTest(transform, Vector2.up)) {
+            if (collision.transform.DotTest(transform, Vector2.up)) 
+            {
                 Hit();
             }
         }
@@ -25,11 +26,13 @@ public class BlockHit : MonoBehaviour
 
         maxHits--;
 
-        if (maxHits == 0) {
+        if (maxHits == 0) 
+        {
             spriteRenderer.sprite = emptyBlock;
         }
 
-        if (item != null) {
+        if (item != null) 
+        {
             Instantiate(item, transform.position, Quaternion.identity);
         }
 
@@ -66,5 +69,4 @@ public class BlockHit : MonoBehaviour
 
         transform.localPosition = to;
     }
-
 }

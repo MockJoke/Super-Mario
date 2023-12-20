@@ -10,12 +10,12 @@ public class BlockItem : MonoBehaviour
 
     private IEnumerator Animate()
     {
-        Rigidbody2D rigidbody = GetComponent<Rigidbody2D>();
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();
         CircleCollider2D physicsCollider = GetComponent<CircleCollider2D>();
         BoxCollider2D triggerCollider = GetComponent<BoxCollider2D>();
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
 
-        rigidbody.isKinematic = true;
+        rb.isKinematic = true;
         physicsCollider.enabled = false;
         triggerCollider.enabled = false;
         spriteRenderer.enabled = false;
@@ -40,9 +40,8 @@ public class BlockItem : MonoBehaviour
             yield return null;
         }
 
-        rigidbody.isKinematic = false;
+        rb.isKinematic = false;
         physicsCollider.enabled = true;
         triggerCollider.enabled = true;
     }
-
 }

@@ -3,12 +3,13 @@ using UnityEngine;
 
 public class DeathAnimation : MonoBehaviour
 {
-    public SpriteRenderer spriteRenderer;
-    public Sprite deadSprite;
+    [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField] private Sprite deadSprite;
 
     private void Reset()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        if (spriteRenderer == null)
+            spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     private void OnEnable()
@@ -28,7 +29,8 @@ public class DeathAnimation : MonoBehaviour
         spriteRenderer.enabled = true;
         spriteRenderer.sortingOrder = 10;
 
-        if (deadSprite != null) {
+        if (deadSprite != null) 
+        {
             spriteRenderer.sprite = deadSprite;
         }
     }
@@ -37,7 +39,8 @@ public class DeathAnimation : MonoBehaviour
     {
         Collider2D[] colliders = GetComponents<Collider2D>();
 
-        foreach (Collider2D collider in colliders) {
+        foreach (Collider2D collider in colliders) 
+        {
             collider.enabled = false;
         }
 
@@ -46,11 +49,13 @@ public class DeathAnimation : MonoBehaviour
         PlayerMovement playerMovement = GetComponent<PlayerMovement>();
         EntityMovement entityMovement = GetComponent<EntityMovement>();
 
-        if (playerMovement != null) {
+        if (playerMovement != null) 
+        {
             playerMovement.enabled = false;
         }
 
-        if (entityMovement != null) {
+        if (entityMovement != null) 
+        {
             entityMovement.enabled = false;
         }
     }
@@ -73,5 +78,4 @@ public class DeathAnimation : MonoBehaviour
             yield return null;
         }
     }
-
 }

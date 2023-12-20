@@ -3,12 +3,12 @@ using UnityEngine;
 
 public class FlagPole : MonoBehaviour
 {
-    public Transform flag;
-    public Transform poleBottom;
-    public Transform castle;
-    public float speed = 6f;
-    public int nextWorld = 1;
-    public int nextStage = 1;
+    [SerializeField] private Transform flag;
+    [SerializeField] private Transform poleBottom;
+    [SerializeField] private Transform castle;
+    [SerializeField] private float speed = 6f;
+    [SerializeField] private int nextWorld = 1;
+    [SerializeField] private int nextStage = 1;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -45,5 +45,4 @@ public class FlagPole : MonoBehaviour
 
         subject.position = position;
     }
-
 }

@@ -12,9 +12,12 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance != null) {
+        if (Instance != null) 
+        {
             DestroyImmediate(gameObject);
-        } else {
+        } 
+        else 
+        {
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
@@ -22,7 +25,8 @@ public class GameManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (Instance == this) {
+        if (Instance == this) 
+        {
             Instance = null;
         }
     }
@@ -34,7 +38,7 @@ public class GameManager : MonoBehaviour
         NewGame();
     }
 
-    public void NewGame()
+    private void NewGame()
     {
         lives = 3;
         coins = 0;
@@ -42,7 +46,7 @@ public class GameManager : MonoBehaviour
         LoadLevel(1, 1);
     }
 
-    public void GameOver()
+    private void GameOver()
     {
         // TODO: show game over screen
 
@@ -71,9 +75,12 @@ public class GameManager : MonoBehaviour
     {
         lives--;
 
-        if (lives > 0) {
+        if (lives > 0) 
+        {
             LoadLevel(world, stage);
-        } else {
+        } 
+        else 
+        {
             GameOver();
         }
     }
@@ -81,7 +88,7 @@ public class GameManager : MonoBehaviour
     public void AddCoin()
     {
         coins++;
-
+        
         if (coins == 100)
         {
             coins = 0;
@@ -93,5 +100,4 @@ public class GameManager : MonoBehaviour
     {
         lives++;
     }
-
 }

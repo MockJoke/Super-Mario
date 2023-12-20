@@ -15,5 +15,4 @@ public class DeathBarrier : MonoBehaviour
             Destroy(other.gameObject);
         }
     }
-
 }

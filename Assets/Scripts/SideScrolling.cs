@@ -6,13 +6,15 @@ public class SideScrolling : MonoBehaviour
     private new Camera camera;
     private Transform player;
 
-    public float height = 6.5f;
-    public float undergroundHeight = -9.5f;
+    [SerializeField] private float height = 6.5f;
+    [SerializeField] private float undergroundHeight = -9.5f;
     public float undergroundThreshold = 0f;
 
     private void Awake()
     {
-        camera = GetComponent<Camera>();
+        if (camera == null)
+            camera = GetComponent<Camera>();
+        
         player = GameObject.FindWithTag("Player").transform;
     }
 
@@ -31,5 +33,4 @@ public class SideScrolling : MonoBehaviour
         cameraPosition.y = underground ? undergroundHeight : height;
         transform.position = cameraPosition;
     }
-
 }

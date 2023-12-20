@@ -38,5 +38,4 @@ public class BlockCoin : MonoBehaviour
 
         transform.localPosition = to;
     }
-
 }

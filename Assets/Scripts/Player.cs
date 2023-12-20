@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public PlayerSpriteRenderer smallRenderer;
-    public PlayerSpriteRenderer bigRenderer;
+    [SerializeField] private PlayerSpriteRenderer smallRenderer;
+    [SerializeField] private PlayerSpriteRenderer bigRenderer;
     private PlayerSpriteRenderer activeRenderer;
 
     public CapsuleCollider2D capsuleCollider { get; private set; }
@@ -16,8 +16,12 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
-        capsuleCollider = GetComponent<CapsuleCollider2D>();
-        deathAnimation = GetComponent<DeathAnimation>();
+        if (capsuleCollider == null)
+            capsuleCollider = GetComponent<CapsuleCollider2D>();
+        
+        if (deathAnimation == null)
+            deathAnimation = GetComponent<DeathAnimation>();
+        
         activeRenderer = smallRenderer;
     }
 
@@ -25,15 +29,18 @@ public class Player : MonoBehaviour
     {
         if (!dead && !starpower)
         {
-            if (big) {
+            if (big) 
+            {
                 Shrink();
-            } else {
+            } 
+            else 
+            {
                 Death();
             }
         }
     }
 
-    public void Death()
+    private void Death()
     {
         smallRenderer.enabled = false;
         bigRenderer.enabled = false;
@@ -54,7 +61,7 @@ public class Player : MonoBehaviour
         StartCoroutine(ScaleAnimation());
     }
 
-    public void Shrink()
+    private void Shrink()
     {
         smallRenderer.enabled = true;
         bigRenderer.enabled = false;
@@ -89,12 +96,12 @@ public class Player : MonoBehaviour
         activeRenderer.enabled = true;
     }
 
-    public void Starpower()
+    public void StarPower()
     {
-        StartCoroutine(StarpowerAnimation());
+        StartCoroutine(StarPowerAnimation());
     }
 
-    private IEnumerator StarpowerAnimation()
+    private IEnumerator StarPowerAnimation()
     {
         starpower = true;
 
@@ -105,7 +112,8 @@ public class Player : MonoBehaviour
         {
             elapsed += Time.deltaTime;
 
-            if (Time.frameCount % 4 == 0) {
+            if (Time.frameCount % 4 == 0) 
+            {
                 activeRenderer.spriteRenderer.color = Random.ColorHSV(0f, 1f, 1f, 1f, 1f, 1f);
             }
 
@@ -115,5 +123,4 @@ public class Player : MonoBehaviour
         activeRenderer.spriteRenderer.color = Color.white;
         starpower = false;
     }
-
 }

@@ -3,16 +3,17 @@ using UnityEngine;
 
 public class Pipe : MonoBehaviour
 {
-    public Transform connection;
-    public KeyCode enterKeyCode = KeyCode.S;
-    public Vector3 enterDirection = Vector3.down;
-    public Vector3 exitDirection = Vector3.zero;
+    [SerializeField] private Transform connection;
+    [SerializeField] private KeyCode enterKeyCode = KeyCode.S;
+    [SerializeField] private Vector3 enterDirection = Vector3.down;
+    [SerializeField] private Vector3 exitDirection = Vector3.zero;
 
     private void OnTriggerStay2D(Collider2D other)
     {
         if (connection != null && other.CompareTag("Player"))
         {
-            if (Input.GetKey(enterKeyCode)) {
+            if (Input.GetKey(enterKeyCode)) 
+            {
                 StartCoroutine(Enter(other.transform));
             }
         }
@@ -67,5 +68,4 @@ public class Pipe : MonoBehaviour
         player.position = endPosition;
         player.localScale = endScale;
     }
-
 }

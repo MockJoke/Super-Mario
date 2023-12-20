@@ -7,14 +7,15 @@ public class PowerUp : MonoBehaviour
         Coin,
         ExtraLife,
         MagicMushroom,
-        Starpower,
+        StarPower,
     }
 
     public Type type;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player")) {
+        if (other.CompareTag("Player")) 
+        {
             Collect(other.gameObject);
         }
     }
@@ -35,12 +36,11 @@ public class PowerUp : MonoBehaviour
                 player.GetComponent<Player>().Grow();
                 break;
 
-            case Type.Starpower:
-                player.GetComponent<Player>().Starpower();
+            case Type.StarPower:
+                player.GetComponent<Player>().StarPower();
                 break;
         }
 
         Destroy(gameObject);
     }
-
 }
